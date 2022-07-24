@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9047F3B288CE282002A8995 /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9047F3A288CE282002A8995 /* TitleHeader.swift */; };
+		E91DA8EE288CB9C300CCDBEF /* LivePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91DA8ED288CB9C300CCDBEF /* LivePhotoCell.swift */; };
 		E920D8EC2885E3D4009EC759 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920D8EB2885E3D4009EC759 /* AppDelegate.swift */; };
 		E920D8EE2885E3D4009EC759 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E920D8ED2885E3D4009EC759 /* SceneDelegate.swift */; };
 		E920D8F52885E3D7009EC759 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E920D8F42885E3D7009EC759 /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E9047F3A288CE282002A8995 /* TitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
+		E91DA8ED288CB9C300CCDBEF /* LivePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhotoCell.swift; sourceTree = "<group>"; };
 		E920D8E82885E3D4009EC759 /* PHPickerViewController Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PHPickerViewController Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E920D8EB2885E3D4009EC759 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E920D8ED2885E3D4009EC759 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				E920D8F92885E3D7009EC759 /* Info.plist */,
 				E920D9012885E936009EC759 /* PhotosGridVC.swift */,
 				E920D9032885E9A1009EC759 /* PhotoCell.swift */,
+				E91DA8ED288CB9C300CCDBEF /* LivePhotoCell.swift */,
+				E9047F3A288CE282002A8995 /* TitleHeader.swift */,
 			);
 			path = "PHPickerViewController Demo";
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E920D9042885E9A1009EC759 /* PhotoCell.swift in Sources */,
+				E9047F3B288CE282002A8995 /* TitleHeader.swift in Sources */,
 				E920D9022885E936009EC759 /* PhotosGridVC.swift in Sources */,
+				E91DA8EE288CB9C300CCDBEF /* LivePhotoCell.swift in Sources */,
 				E920D8EC2885E3D4009EC759 /* AppDelegate.swift in Sources */,
 				E920D8EE2885E3D4009EC759 /* SceneDelegate.swift in Sources */,
 			);
