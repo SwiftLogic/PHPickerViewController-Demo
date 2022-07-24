@@ -28,19 +28,9 @@ class PhotosGridVC: UICollectionViewController {
     
     //MARK: - Properties
     fileprivate var images: [UIImage] = []
-    fileprivate var livePhotos = [PHLivePhoto]()
+    fileprivate var livePhotos: [PHLivePhoto] = []
     fileprivate var videos: [VideoModel] = []
-    
-    
     fileprivate var mediaSections = [MediaSection.photos, .livePhotos, .videos]
-    
-    fileprivate lazy var photoView: PHLivePhotoView = {
-        let photoView = PHLivePhotoView()
-        photoView.backgroundColor = .red
-        photoView.translatesAutoresizingMaskIntoConstraints = false
-        photoView.delegate = self
-        return photoView
-    }()
     
     
     
@@ -52,7 +42,6 @@ class PhotosGridVC: UICollectionViewController {
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: videosCellReUseid)
         collectionView.register(LivePhotoCell.self, forCellWithReuseIdentifier: LivePhotoCell.cellReuseIdentifier)
         collectionView.register(TitleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
-        
         
     }
     
@@ -231,20 +220,33 @@ extension PhotosGridVC: UICollectionViewDelegateFlowLayout {
     }
     
     
+    
+    fileprivate func setUpHeaderTitleLabel(imageName: String, title: String) -> NSAttributedString {
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: imageName)?.withTintColor(.black)
+        let fullString = NSMutableAttributedString(string: "")
+        fullString.append(NSAttributedString(attachment: imageAttachment))
+        fullString.append(NSAttributedString(string: " \(title) "))
+        return fullString
+    }
+    
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! TitleHeader
         let sectionType = mediaSections[indexPath.section]
         
         switch sectionType {
         case .photos:
-            header.titleLabel.text = "Photos"
+            let attributedText = setUpHeaderTitleLabel(imageName: "photo", title: "Photos")
+            header.titleLabel.attributedText = attributedText
             
         case .livePhotos:
-            header.titleLabel.text = "Live Photos"
-
+            let attributedText = setUpHeaderTitleLabel(imageName: "livephoto", title: "Live Photos")
+            header.titleLabel.attributedText = attributedText
+            
         case .videos:
-            header.titleLabel.text = "Videos"
+            let attributedText = setUpHeaderTitleLabel(imageName: "play", title: "Videos")
+            header.titleLabel.attributedText = attributedText
         }
         return header
     }
@@ -273,35 +275,43 @@ extension PhotosGridVC: UICollectionViewDelegateFlowLayout {
     
    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //                let player = AVPlayer(url: newUrl)
-        //                let vc = AVPlayerViewController()
-        //                vc.player = player
-        //
-        //                self?.present(vc, animated: true) {
-        //                    vc.player?.play()
-        //                }
+        
+        let sectionType = mediaSections[indexPath.section]
+        switch sectionType {
+        case .photos:
+            print("photos")
+
+        case .livePhotos:
+            guard let cell = collectionView.cellForItem(at: indexPath) as? LivePhotoCell else {return}
+            cell.livePhotoView.startPlayback(with: .full)
+
+
+        case .videos:
+            let url = videos[indexPath.item].url
+            playVideoOnFullScreen(with: url)
+        }
+       
                         
     }
     
-}
-
-
-
-//MARK: - PHLivePhotoViewDelegate
-extension PhotosGridVC: PHLivePhotoViewDelegate {
     
-    func livePhotoView(_ livePhotoView: PHLivePhotoView, didEndPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
-       photoView.startPlayback(with: .full)
+    fileprivate func playVideoOnFullScreen(with url: URL) {
+        let player = AVPlayer(url: url)
+        let vc = AVPlayerViewController()
+        vc.player = player
+        present(vc, animated: true) {
+            vc.player?.play()
+        }
     }
     
-    
 }
+
+
 
 
 struct VideoModel {
     let url: URL
     let thumbnail: UIImage
-    
 }
 
 
