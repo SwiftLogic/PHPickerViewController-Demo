@@ -16,8 +16,7 @@ class PhotosGridVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavBar()
-        setUpCollectionView()
-        
+        setUpCollectionView()        
     }
     
     
